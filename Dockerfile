@@ -9,7 +9,7 @@ apt-get install -y --no-install-recommends wget apt-transport-https ca-certifica
     apt-get install -y --no-install-recommends nordvpn && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-RUN apk --update --no-cache add curl
+RUN apt-get --update --no-cache add curl
 
 ENTRYPOINT /etc/init.d/nordvpn start && sleep 5 && /bin/bash -c "$@"
 CMD bash
