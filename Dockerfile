@@ -9,12 +9,6 @@ apt-get install -y --no-install-recommends wget apt-transport-https ca-certifica
     apt-get install -y --no-install-recommends nordvpn && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-    rm -rf \
-		/tmp/* \
-		/var/cache/apt/archives/* \
-		/var/lib/apt/lists/* \
-		/var/tmp/*
 
-COPY /rootfs /
-ENV S6_CMD_WAIT_FOR_SERVICES=1
-CMD nord_login && nord_config && nord_connect && nord_migrate && nord_watch
+ENTRYPOINT /etc/init.d/nordvpn start && sleep 5 && /bin/bash -c "$@"
+CMD bash
