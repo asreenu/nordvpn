@@ -11,5 +11,5 @@ apt-get install -y --no-install-recommends wget apt-transport-https ca-certifica
     rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get -y install curl
 
-ENTRYPOINT /etc/init.d/nordvpn start && sleep 5 && /bin/bash -c "$@"
+ENTRYPOINT /etc/init.d/nordvpn start && sleep 5 && /usr/bin/nordvpn login --token $TOKEN && /usr/bin/nordvpn connect
 CMD bash
